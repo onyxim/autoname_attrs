@@ -9,7 +9,7 @@ import os
 import sys
 from shutil import rmtree
 
-from setuptools import setup, Command
+from setuptools import setup, Command, find_packages
 
 # Package meta-data.
 NAME = 'autoname_attrs'
@@ -19,6 +19,10 @@ EMAIL = 'chernyaksergey@gmail.com'
 AUTHOR = 'Sergey Chernyak'
 VERSION = '0.0.1'
 
+# What packages are optional?
+EXTRAS = {
+    'sqlalchemy-models': ['sqlalchemy'],
+}
 
 # The rest you shouldn't have to touch too much :)
 # ------------------------------------------------
@@ -92,11 +96,12 @@ setup(
     author=AUTHOR,
     author_email=EMAIL,
     url=URL,
-    py_modules=['autoname_attrs'],
+    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
     # },
+    extras_require=EXTRAS,
     include_package_data=True,
     license='MIT',
     classifiers=[
